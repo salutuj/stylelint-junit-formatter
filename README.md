@@ -16,7 +16,7 @@ After:
 
 ![image](https://user-images.githubusercontent.com/149985/63839459-ecc15b80-c9b1-11e9-9a3d-2a60276257dd.png)
 
-Install stylelint-junit-formatter (and stylelint and optionally, a config)
+Install stylelint-junit-formatter (and stylelint and optionally, a [config](https://github.com/stylelint/stylelint-config-standard)):
 ```console
 $ npm install stylelint-junit-formatter stylelint stylelint-config-standard --save-dev
 ```
@@ -28,8 +28,26 @@ Add a `.stylelintrc`, e.g.:
   "extends": "stylelint-config-standard",
   "ignoreFiles": "node_modules/**/*",
 }
-
 ```
+
+Add a script to `package.json` that runs stylelint, e.g.:
+
+```json
+{
+  "name": "stylelint-ci",
+  "version": "1.0.0",
+  "scripts": {
+    "lint": "stylelint '**/*.css'"
+  },
+  "devDependencies": {
+    "stylelint": "^10.1.0",
+    "stylelint-config-standard": "^18.3.0",
+    "stylelint-junit-formatter": "^0.2.2"
+  }
+}
+```
+
+At this point, you should be able to execute `npm run lint` on the command line.
 
 Add a `.circleci/config.yml` that runs stylelint and saves the results, e.g.:
 
