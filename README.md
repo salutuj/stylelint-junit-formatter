@@ -6,6 +6,70 @@ Output JUnit XML reports of stylelint results (that can be parsed by CircleCI or
 
 ## Usage
 
+### With CircleCI
+
+Before:
+
+![image](https://user-images.githubusercontent.com/149985/63839495-ff3b9500-c9b1-11e9-873c-5f7610653985.png)
+
+After:
+
+![image](https://user-images.githubusercontent.com/149985/63839459-ecc15b80-c9b1-11e9-9a3d-2a60276257dd.png)
+
+Install stylelint-junit-formatter (and stylelint and optionally, a config)
+```console
+$ npm install stylelint-junit-formatter stylelint stylelint-config-standard --save-dev
+```
+
+Add a `.stylelintrc`, e.g.:
+
+```javascript
+{
+  "extends": "stylelint-config-standard",
+  "ignoreFiles": "node_modules/**/*",
+}
+
+```
+
+Add a `.circleci/config.yml` that runs stylelint and saves the results, e.g.:
+
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10
+
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package-lock.json" }}
+            - v1-dependencies-
+
+      - run:
+          name: Build
+          command: if [ ! -d "node_modules" ]; then npm ci; fi
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
+
+      - run:
+          name: Lint
+          command: |
+            mkdir -p reports/stylelint
+            npm run lint -s -- --custom-formatter 'node_modules/stylelint-junit-formatter' > reports/stylelint/test-results.xml
+
+      - store_test_results:
+          path: reports
+```
+
+### With Bamboo
+*TODO* (PRs welcome!)
+
 ### With the Stylelint Node API:
 
 ```javascript
@@ -47,7 +111,7 @@ The formatter will generate a `.xml`-report with the following look:
 </testsuites>
 ```
 
-In the event of errors, those are presented in a way that Bamboo can interpret:
+In the event of errors, those are presented in a way that CircleCI/Bamboo can interpret:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <testsuites package="stylelint.rules">

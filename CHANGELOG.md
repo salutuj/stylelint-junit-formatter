@@ -1,8 +1,7 @@
 # Changelog
 
-## [unreleased]
-
-- [Updates dependencies to latest versions](https://github.com/eddies/stylelint-junit-formatter/pull/6)
+## [0.2.2] - 2019-08-28
+- [Add "files" to package.json](https://github.com/eddies/stylelint-junit-formatter/pull/9)
 
 ## [0.2.1] - 2018-05-19
 

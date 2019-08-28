@@ -9,7 +9,7 @@ const mockPassingTest = [
     warnings: [],
     deprecations: [],
     invalidOptionWarnings: [],
-    ignored: false
+    ignored: false,
   },
   {
     source: 'path/to/fileB.css',
@@ -17,7 +17,7 @@ const mockPassingTest = [
     warnings: [],
     deprecations: [],
     invalidOptionWarnings: [],
-    ignored: false
+    ignored: false,
   },
   {
     source: 'path/to/fileC.css',
@@ -25,8 +25,8 @@ const mockPassingTest = [
     warnings: [],
     deprecations: [],
     invalidOptionWarnings: [],
-    ignored: false
-  }
+    ignored: false,
+  },
 ];
 
 const expectedPassingXml = `<?xml version="1.0" encoding="utf-8"?>
@@ -49,7 +49,7 @@ const mockFailingTest = [
     warnings: [],
     deprecations: [],
     invalidOptionWarnings: [],
-    ignored: false
+    ignored: false,
   },
   {
     source: 'path/to/fileB.css',
@@ -60,19 +60,19 @@ const mockFailingTest = [
         column: 3,
         rule: 'declaration-block-properties-order',
         severity: 'error',
-        text: 'Expected quot;colorquot; to come before quot;font-weightquot; (declaration-block-properties-order)'
+        text: 'Expected quot;colorquot; to come before quot;font-weightquot; (declaration-block-properties-order)',
       },
       {
         line: 8,
         column: 3,
         rule: 'shorthand-property-no-redundant-values',
         severity: 'error',
-        text: 'Unexpected longhand value #39;0 2rem 1.5rem 2rem#39; instead of #39;0 2rem 1.5rem#39; (shorthand-property-no-redundant-values)'
+        text: 'Unexpected longhand value #39;0 2rem 1.5rem 2rem#39; instead of #39;0 2rem 1.5rem#39; (shorthand-property-no-redundant-values)',
       },
     ],
     deprecations: [],
     invalidOptionWarnings: [],
-    ignored: false
+    ignored: false,
   },
   {
     source: 'path/to/fileC.css',
@@ -80,8 +80,8 @@ const mockFailingTest = [
     warnings: [],
     deprecations: [],
     invalidOptionWarnings: [],
-    ignored: false
-  }
+    ignored: false,
+  },
 ];
 
 const expectedFailingXml = `<?xml version="1.0" encoding="utf-8"?>
