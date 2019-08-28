@@ -3,7 +3,9 @@
   "version": "0.2.2",
   "description": "Output JUnit XML reports of stylelint results",
   "main": "index.js",
+  "files": ["index.js"],
   "scripts": {
+    "lint": "eslint ./**/*.js",
     "test": "tape test.js"
   },
   "repository": {
@@ -32,6 +34,9 @@
     "xmlbuilder": "^13.0.2"
   },
   "devDependencies": {
+    "eslint": "^6.2.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
     "tape": "^4.11.0",
     "xml2js": "^0.4.19"
   }
