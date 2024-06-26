@@ -1,7 +1,13 @@
 const xmlBuilder = require('xmlbuilder');
 
-function createFailedCaseName(rule, line, column) {
-  return `${rule} - line ${line}, column ${column}`
+function createFailedCaseName(testCase, source) {
+  const {
+    rule,
+    line,
+    column,
+  } = testCase;
+  const shortName = source.replace(system.cwd(), '').substring(1);
+  return `${rule} - ${shortName} (${line},${column})`;
 }
 
 function parseFailedCase(testCase, source) {
@@ -14,7 +20,7 @@ function parseFailedCase(testCase, source) {
   } = testCase;
 
   return {
-    '@name': createFailedCaseName(rule, line, column),
+    '@name': createFailedCaseName(testCase, source),
     failure: {
       '@type': severity,
       '@message': text,
